@@ -3,6 +3,7 @@ package main
 import (
     "fmt"
     "github.com/urfave/cli"
+
     "os/exec"
 )
 
@@ -23,5 +24,6 @@ func compose(imagePath string) {
 }
 
 func copyToClipboard(imagePath string) {
-    fmt.Println("copyToClipboard")
+    command := fmt.Sprintf("set the clipboard to POSIX file \"%s\"", imagePath)
+    exec.Command("osascript", "-e", command).Run()
 }
