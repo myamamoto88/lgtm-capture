@@ -3,6 +3,7 @@ package main
 import (
     "fmt"
     "github.com/urfave/cli"
+    "os/exec"
 )
 
 func doAction(context *cli.Context) {
@@ -14,7 +15,7 @@ func doAction(context *cli.Context) {
 }
 
 func capture(imagePath string) {
-    fmt.Println("capture")
+    exec.Command("screencapture", "-i", imagePath).Run()
 }
 
 func compose(imagePath string) {
