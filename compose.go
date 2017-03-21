@@ -43,9 +43,6 @@ func decorate(magicWand *imagick.MagickWand) {
     textImage.SetTextKerning(fontSize / 10)
 
     magicWand.AnnotateImage(textImage, 0, 0, 0, "LGTM")
-    for magicWand.NextImage() {
-      magicWand.AnnotateImage(textImage, 0, 0, 0, "LGTM")
-    }
 
     textImage.Destroy()
 }
