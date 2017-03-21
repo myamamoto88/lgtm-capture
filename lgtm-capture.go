@@ -7,8 +7,8 @@ import (
 
 func main() {
   app := cli.NewApp()
-  app.Name = "lgtm"
-  app.Usage = "Make the LGTM image, and copy clipboard"
+  app.Name = "lgtm-capture"
+  app.Usage = "Capture screen, then compose image for LGTM, then copy it to the clipboard."
   app.Action = doAction
   app.Run(os.Args)
 }
