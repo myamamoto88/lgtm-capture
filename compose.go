@@ -42,7 +42,7 @@ func decorate(magicWand *imagick.MagickWand) {
     textImage.SetFontSize(fontSize)
     textImage.SetTextKerning(fontSize / 10)
 
-    magicWand.AnnotateImage(textImage, 0, 0, 0, "LGTM")
+    magicWand.AnnotateImage(textImage, 10, 0, 0, "LGTM")
 
     textImage.Destroy()
 }
@@ -55,7 +55,7 @@ func fetchTextImage() *imagick.DrawingWand {
     drawingWand := imagick.NewDrawingWand()
     drawingWand.SetFont(FONT)
     drawingWand.SetFillColor(pixelWand)
-    drawingWand.SetGravity(imagick.GRAVITY_CENTER)
+    drawingWand.SetGravity(imagick.GRAVITY_SOUTH_WEST)
 
     return drawingWand
 }
