@@ -12,9 +12,9 @@ func Instance() *viper.Viper {
 }
 
 func new() *viper.Viper {
-    viper.SetConfigName(".lgtm-capture.yml")
-    viper.SetConfigType("yaml")
-    viper.AddConfigPath("$HOME/")
+    viper.AddConfigPath("$HOME")
+    viper.SetConfigName(".lgtm-capture")
+    viper.SetConfigType("yml")
 
     viper.SetDefault("font.ttf", "/Library/Fonts/Impact.ttf")
     viper.SetDefault("font.adjusted_value", 3.5)
