@@ -3,13 +3,7 @@ package main
 import (
     "math"
     "gopkg.in/gographics/imagick.v2/imagick"
-)
-
-const (
-    FONT = "/Library/Fonts/Impact.ttf"
-    FONT_ADJUSTED_VALUE = 3.5
-    FONT_COLOR = "white"
-    FONT_BORDER_COLOR = "black"
+    "github.com/myamamoto88/lgtm-capture/config"
 )
 
 func compose(imagePath string) {
@@ -51,14 +45,14 @@ func decorate(magicWand *imagick.MagickWand) {
 func fetchTextImage() *imagick.DrawingWand {
     fillWand := imagick.NewPixelWand()
     defer fillWand.Destroy()
-    fillWand.SetColor(FONT_COLOR)
+    fillWand.SetColor(config.Instance().GetString("font.base_color"))
 
     strokeWand := imagick.NewPixelWand()
     defer strokeWand.Destroy()
-    strokeWand.SetColor(FONT_BORDER_COLOR)
+    strokeWand.SetColor(config.Instance().GetString("font.border_color"))
 
     drawingWand := imagick.NewDrawingWand()
-    drawingWand.SetFont(FONT)
+    drawingWand.SetFont(config.Instance().GetString("font.ttf"))
     drawingWand.SetFillColor(fillWand)
     drawingWand.SetStrokeColor(strokeWand)
     drawingWand.SetGravity(imagick.GRAVITY_SOUTH_WEST)
@@ -67,5 +61,5 @@ func fetchTextImage() *imagick.DrawingWand {
 }
 
 func calcFontSize(width, height uint) float64 {
-    return math.Min(float64(width), float64(height)) / FONT_ADJUSTED_VALUE
+    return math.Min(float64(width), float64(height)) / config.Instance().GetFloat64("font.adjusted_value")
 }
