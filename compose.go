@@ -7,8 +7,9 @@ import (
 
 const (
     FONT = "/Library/Fonts/Impact.ttf"
-    FONT_ADJUSTED_VALUE = 2.5
+    FONT_ADJUSTED_VALUE = 3.5
     FONT_COLOR = "white"
+    FONT_BORDER_COLOR = "black"
 )
 
 func compose(imagePath string) {
@@ -48,13 +49,18 @@ func decorate(magicWand *imagick.MagickWand) {
 }
 
 func fetchTextImage() *imagick.DrawingWand {
-    pixelWand := imagick.NewPixelWand()
-    defer pixelWand.Destroy()
-    pixelWand.SetColor(FONT_COLOR)
+    fillWand := imagick.NewPixelWand()
+    defer fillWand.Destroy()
+    fillWand.SetColor(FONT_COLOR)
+
+    strokeWand := imagick.NewPixelWand()
+    defer strokeWand.Destroy()
+    strokeWand.SetColor(FONT_BORDER_COLOR)
 
     drawingWand := imagick.NewDrawingWand()
     drawingWand.SetFont(FONT)
-    drawingWand.SetFillColor(pixelWand)
+    drawingWand.SetFillColor(fillWand)
+    drawingWand.SetStrokeColor(strokeWand)
     drawingWand.SetGravity(imagick.GRAVITY_SOUTH_WEST)
 
     return drawingWand
