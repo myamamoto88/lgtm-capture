@@ -4,7 +4,7 @@ import "github.com/spf13/viper"
 
 var _instance *viper.Viper
 
-func Instance() *viper.Viper {
+func instance() *viper.Viper {
     if _instance == nil {
         _instance = new()
     }
@@ -16,7 +16,7 @@ func new() *viper.Viper {
     viper.SetConfigName(".lgtm-capture")
     viper.SetConfigType("yml")
 
-    viper.SetDefault("font.ttf", "/Library/Fonts/Impact.ttf")
+    viper.SetDefault("font.ttf_path", "/Library/Fonts/Impact.ttf")
     viper.SetDefault("font.adjusted_value", 3.5)
     viper.SetDefault("font.base_color", "white")
     viper.SetDefault("font.border_color", "black")
@@ -24,4 +24,20 @@ func new() *viper.Viper {
     viper.ReadInConfig()
 
     return viper.GetViper()
+}
+
+func FontTTFPath() string {
+    return instance().GetString("font.ttf_path")
+}
+
+func FontAdjustedValue() float64 {
+    return instance().GetFloat64("font.adjusted_value")
+}
+
+func FontBaseColor() string {
+    return instance().GetString("font.base_color")
+}
+
+func FontBorderColor() string {
+    return instance().GetString("font.border_color")
 }

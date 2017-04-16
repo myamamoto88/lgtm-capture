@@ -45,14 +45,14 @@ func decorate(magicWand *imagick.MagickWand) {
 func fetchTextImage() *imagick.DrawingWand {
     fillWand := imagick.NewPixelWand()
     defer fillWand.Destroy()
-    fillWand.SetColor(config.Instance().GetString("font.base_color"))
+    fillWand.SetColor(config.FontBaseColor())
 
     strokeWand := imagick.NewPixelWand()
     defer strokeWand.Destroy()
-    strokeWand.SetColor(config.Instance().GetString("font.border_color"))
+    strokeWand.SetColor(config.FontBorderColor())
 
     drawingWand := imagick.NewDrawingWand()
-    drawingWand.SetFont(config.Instance().GetString("font.ttf"))
+    drawingWand.SetFont(config.FontTTFPath())
     drawingWand.SetFillColor(fillWand)
     drawingWand.SetStrokeColor(strokeWand)
     drawingWand.SetGravity(imagick.GRAVITY_SOUTH_WEST)
@@ -61,5 +61,5 @@ func fetchTextImage() *imagick.DrawingWand {
 }
 
 func calcFontSize(width, height uint) float64 {
-    return math.Min(float64(width), float64(height)) / config.Instance().GetFloat64("font.adjusted_value")
+    return math.Min(float64(width), float64(height)) / config.FontAdjustedValue()
 }
